@@ -53,7 +53,14 @@ TEST_F(drawtest_test, test_attributes)
     attributes.emplace("key3", false);
 
     print_map(attributes);
+    attributes.clear();
 
+    attributes.emplace(0, 2);
+    attributes.emplace("key1", "value1");
+    attributes.emplace("key2", 43); 
+    attributes.emplace("key3", false);
+
+    print_map(attributes);
     ASSERT_TRUE(true);
 }
 
