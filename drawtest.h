@@ -16,7 +16,7 @@ template<typename T>
 std::string print_string(const T& x)
 {
     std::stringstream out;
- 
+    out.setf(std::ios::boolalpha);
     out << x;
     std::string str_ = out.str();
     return str_;
@@ -28,6 +28,11 @@ public:
     template<typename T>
     object_t(T x) : self_(std::make_shared<model<T>>(std::move(x)))
     {
+    }
+
+    bool operator==(const object_t& x) const
+    {
+        return self_->print_string_() == x.self_->print_string_();
     }
 
     friend std::string print_string(const object_t& x)
@@ -82,16 +87,23 @@ namespace std
 };
 
 
-void print_vector(const attributes_t& x)
+void print_map(const attributes_t& x)
 {
-    std::stringstream out;
-    out << "<vector>" << std::endl;
+    std::cout << "<map>" << std::endl;
 
     for (const auto& e: x) {
-        print_string(e);
+        std::cout << std::string(2, ' ') 
+                  << "key: " << print_string(e.first) << ", " 
+                  << "value: " << print_string(e.second)  
+                  << std::endl;
     }
 
-    out << "</vector>" << std::endl; 
+    std::cout << "</map>" << std::endl; 
+}
+
+void map_size(const attributes_t& x)
+{
+    std::cout << "map size: " << x.size() << std::endl;
 }
 
 class my_class_t
