@@ -1,36 +1,32 @@
-project(drawtest)
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.9)
+project(poly)
 
-include_directories(                    
-		            "$ENV{GMOCK_INC}"
-                    "$ENV{GTEST_INC}"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-		           )
+set(CMAKE_CXX_STANDARD 17)
 
-link_directories(
-		        "$ENV{GMOCK_LIB}"
-                "$ENV{GTEST_LIB}"
-		        )
+include_directories(src)
 
-set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -std=c++17 -g -Wall -O3")
+add_subdirectory(src)
+add_subdirectory(tests)
 
-set(sources
-  main.cpp
-  drawtest_test.cpp
-  )
 
-add_executable(drawtest ${sources})
-target_link_libraries(drawtest gmock)
-target_link_libraries(drawtest gtest)
-target_link_libraries(drawtest pthread)
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall -O0 -fmax-errors=1")
+#
+# set(sources
+#     drawtest_test.cpp
+#     main.cpp
+# )
+#
+# add_executable(drawtest ${sources})
+#
+# add_custom_command(TARGET drawtest 
+#   POST_BUILD
+#   COMMAND "make")
+#
+# add_custom_command(TARGET drawtest
+#  POST_BUILD
+#  COMMAND "drawtest")
+  #COMMAND valgrind --tool=memcheck --leak-check=yes ./drawtest)
+  #COMMAND valgrind --tool=memcheck --track-origins=yes --leak-check=full --show-leak-kinds=all ./drawtest)
+  #COMMAND valgrind --tool=memcheck --leak-check=yes ./drawtest)
 
-add_custom_command(TARGET drawtest
-                   POST_BUILD
-                   COMMAND "make")
-
-add_custom_command(TARGET drawtest
-                   POST_BUILD
-#                  COMMAND valgrind --tool=memcheck --track-origins=yes --leak-check=full --show-leak-kinds=all ./drawtest)
-#		           COMMAND valgrind --tool=memcheck --leak-check=yes ./drawtest)
-                   COMMAND "drawtest")
 

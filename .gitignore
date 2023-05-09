@@ -1,7 +1,9 @@
+
+.cache/
 build/
 cmake-build-debug/
+tests/lib/
 .git/
-.idea/
 *.o
 *.so
 *.user

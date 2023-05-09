@@ -1,27 +1,23 @@
 // drawtest_test.cpp
 
-#include <gmock/gmock.h>
+#include "gtest/gtest.h"
 #include <sstream>
-#include "drawtest.h"
+#include "object.h"
 
 using namespace::testing;
 
-class drawtest_test: public Test 
-{
+class object_t_test: public Test {
 public:
-    void SetUp()override 
-    {
+    void SetUp()override {
     }
 
-    void TearDown()override 
-    {
+    void TearDown()override {
     }
 
     attributes_t attributes;
 };
 
-TEST_F(drawtest_test, test_attributes)
-{
+TEST_F(object_t_test, test_attributes) {
     attributes.emplace(0, 2);
     attributes.emplace(1, 2);
     attributes.emplace(2, 2);
